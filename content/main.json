@@ -1,0 +1,239 @@
+{
+  "_info": "Script utama Visual Novel — English Journey",
+  "_catatan": "Field yang diawali _ adalah komentar, diabaikan oleh engine. Hapus setelah paham.",
+
+  "config": {
+    "startScene": "intro"
+  },
+
+  "scenes": {
+
+    "intro": {
+      "_comment": "Scene pembuka. 'speaker' kosong = narasi (nameplate tidak muncul). Tidak ada tombol Rewind di sini karena belum ada history.",
+      "background": "assets/bg_intro.jpg",
+      "speaker": "",
+      "dialog": "Selamat datang di English Journey.\n\nSebuah perjalanan seru untuk belajar Bahasa Inggris.",
+      "options": [
+        { "label": "Lanjut  ▶", "next": "intro_2" }
+      ]
+    },
+
+    "intro_2": {
+      "_comment": "Scene kedua intro. Bisa diisi narasi atau dialog karakter.",
+      "background": "assets/bg_intro.jpg",
+      "speaker": "",
+      "dialog": "Di sini kamu akan belajar Grammar, Vocabulary, dan banyak lagi.\n\nSiap untuk mulai?",
+      "options": [
+        { "label": "Siap!",              "next": "main_menu" },
+        { "label": "Tentang Aplikasi Ini", "next": "about"    }
+      ]
+    },
+
+    "main_menu": {
+      "_comment": "Menu utama. User akan selalu kembali ke sini setelah menyelesaikan materi atau quiz. Opsi 'EXIT' memicu konfirmasi keluar.",
+      "background": "assets/bg_menu.jpg",
+      "speaker": "Guide",
+      "dialog": "Mau mulai belajar dari mana?",
+      "options": [
+        { "label": "📖  Grammar",       "next": "grammar_intro"   },
+        { "label": "📚  Vocabulary",    "next": "vocab_intro"     },
+        { "label": "✏️   Mulai Test",   "next": "quiz_entry"      },
+        { "label": "ℹ️   Tentang Kami", "next": "about"           },
+        { "label": "🚪  Keluar",        "next": "EXIT"            }
+      ]
+    },
+
+    "about": {
+      "_comment": "Halaman tentang. Ganti isi dialog sesuai kebutuhan.",
+      "background": "assets/bg_menu.jpg",
+      "speaker": "",
+      "dialog": "English Journey adalah aplikasi belajar Bahasa Inggris berbasis Visual Novel.\n\nDibuat dengan ❤️  untuk para pejuang bahasa.",
+      "options": [
+        { "label": "← Kembali", "next": "main_menu" }
+      ]
+    },
+
+
+
+    "grammar_intro": {
+      "_comment": "Landing page untuk topik Grammar. Tambah opsi sesuai sub-topik yang kamu inginkan.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "Grammar adalah fondasi dari Bahasa Inggris. Tanpa grammar yang baik, kalimat bisa terdengar janggal.\n\nMau belajar apa dulu?",
+      "options": [
+        { "label": "Apa itu Grammar?",   "next": "grammar_what"    },
+        { "label": "Present Tense",       "next": "grammar_present" },
+        { "label": "Past Tense",          "next": "grammar_past"    },
+        { "label": "← Menu Utama",        "next": "main_menu"       }
+      ]
+    },
+
+    "grammar_what": {
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "Grammar adalah aturan yang mengatur bagaimana kata-kata disusun menjadi kalimat yang benar dan bermakna.\n\nSingkatnya: grammar = aturan bermain bahasa!",
+      "options": [
+        { "label": "Contoh lebih lanjut", "next": "grammar_what_2" },
+        { "label": "← Kembali ke Grammar", "next": "grammar_intro" }
+      ]
+    },
+
+    "grammar_what_2": {
+      "_comment": "Isi dengan contoh atau penjelasan lanjutan.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "[Isi dengan penjelasan atau contoh lanjutan tentang Grammar]",
+      "options": [
+        { "label": "← Kembali ke Grammar", "next": "grammar_intro" }
+      ]
+    },
+
+    "grammar_present": {
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "Present Tense digunakan untuk:\n• Fakta umum: 'The sun rises in the east.'\n• Kebiasaan: 'She reads every morning.'\n• Jadwal: 'The train leaves at 8 AM.'",
+      "options": [
+        { "label": "Rumus Present Tense",     "next": "grammar_present_2" },
+        { "label": "← Kembali ke Grammar",    "next": "grammar_intro"     }
+      ]
+    },
+
+    "grammar_present_2": {
+      "_comment": "Isi dengan rumus, latihan, atau materi lanjutan Present Tense.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "[Isi dengan rumus atau latihan Present Tense]\n\nContoh rumus:\nS + V1 (+ s/es)  →  She reads | He goes",
+      "options": [
+        { "label": "← Kembali ke Grammar", "next": "grammar_intro" }
+      ]
+    },
+
+    "grammar_past": {
+      "_comment": "Isi dengan materi Past Tense.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "[Isi dengan materi Past Tense]",
+      "options": [
+        { "label": "← Kembali ke Grammar", "next": "grammar_intro" }
+      ]
+    },
+
+
+
+    "vocab_intro": {
+      "_comment": "Landing page untuk topik Vocabulary. Isi sub-topik sesuai kebutuhan.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "Vocabulary adalah kosakata — semakin banyak kamu tahu, semakin mudah berbicara dan menulis!\n\nMau mulai dari mana?",
+      "options": [
+        { "label": "[Topik Vocab 1]",    "next": "vocab_topic_1"  },
+        { "label": "[Topik Vocab 2]",    "next": "vocab_topic_2"  },
+        { "label": "← Menu Utama",       "next": "main_menu"      }
+      ]
+    },
+
+    "vocab_topic_1": {
+      "_comment": "Ganti nama scene dan isi sesuai topik vocabulary yang kamu inginkan.",
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "[Isi dengan materi Vocabulary Topik 1]",
+      "options": [
+        { "label": "← Kembali ke Vocabulary", "next": "vocab_intro" }
+      ]
+    },
+
+    "vocab_topic_2": {
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": "[Isi dengan materi Vocabulary Topik 2]",
+      "options": [
+        { "label": "← Kembali ke Vocabulary", "next": "vocab_intro" }
+      ]
+    },
+
+
+
+    "quiz_entry": {
+      "_comment": "Scene khusus untuk masuk ke mode quiz. 'type': 'quiz' memberitahu engine untuk menampilkan tombol 'Mulai Test!' setelah dialog selesai. 'quizId' menunjuk ke data quiz di bawah. 'onComplete' adalah scene yang ditampilkan setelah quiz selesai.",
+      "background": "assets/bg_quiz.jpg",
+      "speaker": "",
+      "dialog": "Saatnya uji kemampuan kamu!\n\nKamu akan diberikan beberapa soal pilihan ganda.\nUrutan soal akan diacak setiap sesi.\n\nSiap?",
+      "type": "quiz",
+      "quizId": "quiz_grammar",
+      "onComplete": "main_menu"
+    }
+
+  },
+
+
+
+  "quizzes": {
+
+    "quiz_grammar": {
+      "_comment": "Template quiz. Tambahkan soal di array 'questions'. 'shuffle': true akan mengacak urutan soal setiap sesi. 'onComplete' adalah fallback jika tidak ada di scene.",
+      "title": "Test Grammar",
+      "shuffle": true,
+      "onComplete": "main_menu",
+      "questions": [
+
+        {
+          "_comment": "Format satu soal: 'question' = teks soal, 'choices' = 4 pilihan (array), 'correct' = index jawaban benar (mulai dari 0, jadi A=0, B=1, C=2, D=3)",
+          "question": "Which sentence is grammatically correct?",
+          "choices": [
+            "She go to school every day.",
+            "She goes to school every day.",
+            "She going to school every day.",
+            "She gone to school every day."
+          ],
+          "correct": 1
+        },
+
+        {
+          "question": "What is the past tense of the verb 'go'?",
+          "choices": [
+            "goed",
+            "goes",
+            "went",
+            "gone"
+          ],
+          "correct": 2
+        },
+
+        {
+          "question": "Choose the correct article: '___ apple a day keeps the doctor away.'",
+          "choices": [
+            "A",
+            "An",
+            "The",
+            "(no article)"
+          ],
+          "correct": 1
+        },
+
+        {
+          "question": "Which word is an adjective?",
+          "choices": [
+            "quickly",
+            "run",
+            "beautiful",
+            "happiness"
+          ],
+          "correct": 2
+        },
+
+        {
+          "question": "Complete the sentence: 'I ___ my homework yesterday.'",
+          "choices": [
+            "do",
+            "does",
+            "did",
+            "done"
+          ],
+          "correct": 2
+        }
+
+      ]
+    }
+
+  }
+}
