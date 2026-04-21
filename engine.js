@@ -147,6 +147,12 @@ function _applyScene(scene) {
   // Bersihkan opsi lama
   clearOptions();
 
+  if (scene.hideUI) {
+  document.body.classList.add('no-ui');
+} else {
+  document.body.classList.remove('no-ui');
+}
+
   // Reset flag quiz & perbarui tombol Rewind
   state.inQuiz = false;
   updateRewindBtn();

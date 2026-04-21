@@ -47,7 +47,8 @@
       "_comment": "Halaman tentang. Ganti isi dialog sesuai kebutuhan.",
       "background": "assets/bg_menu.jpg",
       "speaker": "",
-      "dialog": "English Journey adalah aplikasi belajar Bahasa Inggris berbasis Visual Novel.\n\nDibuat dengan ❤️  untuk para pejuang bahasa.",
+      "dialog": "",
+      "hideUI": true,
       "options": [
         { "label": "← Kembali", "next": "main_menu" }
       ]
