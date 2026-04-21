@@ -231,6 +231,15 @@ function cancelTyping() {
 function handleTextBoxClick() {
   if (!state.isTyping) return;
 
+  // ── BUG FIX ──
+  // Jika sedang dalam mode quiz, delegasikan ke fungsi skip khusus quiz
+  // yang ada di quiz.js. Ini mencegah text box click secara tidak sengaja
+  // me-reset quiz ke awal dengan menampilkan ulang tombol "Mulai Test!".
+  if (state.inQuiz) {
+    skipQuizTypewriter();
+    return;
+  }
+
   const scene = state.script.scenes?.[state.currentSceneId];
   if (!scene) return;
 

@@ -220,6 +220,35 @@ function showQuizResult() {
 }
 
 
+// ═════════════════════════════════════════════════════════════
+// SKIP TYPEWRITER SAAT MODE QUIZ
+// Dipanggil oleh handleTextBoxClick() di engine.js ketika
+// state.inQuiz = true dan typewriter soal masih berjalan.
+//
+// Tujuan: membiarkan user skip animasi teks soal (seperti di VN normal)
+// TANPA mereset quiz atau memunculkan tombol "Mulai Test!" lagi.
+// ═════════════════════════════════════════════════════════════
+function skipQuizTypewriter() {
+  // Pastikan benar-benar sedang ada soal yang aktif
+  if (!state.isTyping || quizState.questions.length === 0) return;
+
+  const question = quizState.questions[quizState.currentIndex];
+  if (!question) return;
+
+  // Batalkan animasi
+  cancelTyping();
+
+  // Bangun ulang teks soal lengkap (sama persis seperti di renderQuestion)
+  const current = quizState.currentIndex + 1;
+  const total   = quizState.questions.length;
+  DOM.dialogText().textContent = `[${current}/${total}]   ${question.question}`;
+  DOM.textCursor().style.display = 'none'; // Kursor tidak perlu muncul di soal
+
+  // Langsung tampilkan pilihan jawaban
+  renderChoices(question);
+}
+
+
 // ─────────────────────────────────────────────────────────────
 // UTILITY: Fisher-Yates Shuffle
 // Mengacak urutan elemen dalam array secara acak yang adil.
