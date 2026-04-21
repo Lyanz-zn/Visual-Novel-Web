@@ -120,10 +120,32 @@ html, body {
     var(--clr-overlay-bot) 100%
   );
 }
+.no-ui #vn-overlay,
+.no-ui #vn-grain {
+  display: none ;
+}
+.no-ui #text-box {
+  display: none;
+  box-shadow: none;
+}
 
+.no-ui #speaker-name-wrap {
+  display: none;
+}
+
+.no-ui #dialog-area {
+  display: none;
+}
+/* tombol tetap hidup */
+.no-ui #options-wrap {
+  display: flex;
+  bottom: 40px;
+  right: 50px;
+  z-index: 9999;
+}
 
 /* ═════════════════════════════════════════════════════════════
-   AREA KARAKTER (PLACEHOLDER)
+  AREA KARAKTER (PLACEHOLDER)
    ═════════════════════════════════════════════════════════════ */
 #char-area {
   position: absolute;
@@ -137,7 +159,7 @@ html, body {
 /* Kotak placeholder — hapus border & teks ini setelah karakter ada */
 #char-placeholder {
   width: 200px;
-  height: 360px;
+  height: 360px; 
   border: 1.5px dashed rgba(90, 120, 200, 0.18);
   border-radius: 6px;
   display: flex;
