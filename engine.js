@@ -150,14 +150,38 @@ function _applyScene(scene) {
   clearOptions();
 
   if (scene.hideUI) {
-    document.body.classList.add('no-ui');
-  } else {
-    document.body.classList.remove('no-ui');
-  }
+document.body.classList.add('no-ui');
+} else {
+  document.body.classList.remove('no-ui');
+}
 
-  // Reset index dialog ke awal scene
-  state.dialogIndex = 0;
+// Mengambil kode dari S-hafidz
+const cards = document.querySelectorAll(".card");
 
+// Mengambil kode dari main
+// Reset index dialog ke awal scene
+state.dialogIndex = 0;
+
+// reset semua card
+cards.forEach(c => c.classList.add("hidden"));
+
+if (scene.layout === "card") {
+  document.body.classList.add("no-ui");
+
+  const card1 = document.getElementById("about-card-1");
+  const card2 = document.getElementById("about-card-2");
+
+  if (card1) card1.classList.remove("hidden");
+  if (card2) card2.classList.remove("hidden");
+
+  showOptions(scene.options ?? []);
+  return;
+
+
+  // 🔥 langsung tampilkan opsi (biar tombol muncul)
+  showOptions(scene.options ?? []);
+  return; // ❗ PENTING: stop di sini
+}
   // Reset flag quiz & perbarui tombol Rewind
   state.inQuiz = false;
   updateRewindBtn();

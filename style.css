@@ -77,6 +77,31 @@ html, body {
   overflow: hidden;
   user-select: none; /* Cegah teks ter-select saat klik cepat */
 }
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 420px;
+  max-width: 90%;
+
+  background: rgba(10, 15, 40, 0.85);
+  border-radius: 12px;
+  padding: 28px 32px;
+
+  z-index: 10000; /* 🔥 FIX UTAMA */
+}
+#about-card-1 {
+  left: 30%;
+}
+
+#about-card-2 {
+  left: 70%;
+}
+.hidden {
+  display: none;
+}
 
 
 /* ─── BACKGROUND ──────────────────────────────────────────── */
