@@ -49,6 +49,7 @@
       "speaker": "",
       "dialog": "",
       "hideUI": true,
+      "layout": "card",
       "options": [
         { "label": "← Kembali", "next": "main_menu" }
       ]

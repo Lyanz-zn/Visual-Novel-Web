@@ -152,7 +152,28 @@ function _applyScene(scene) {
 } else {
   document.body.classList.remove('no-ui');
 }
+const cards = document.querySelectorAll(".card");
 
+// reset semua card
+cards.forEach(c => c.classList.add("hidden"));
+
+if (scene.layout === "card") {
+  document.body.classList.add("no-ui");
+
+  const card1 = document.getElementById("about-card-1");
+  const card2 = document.getElementById("about-card-2");
+
+  if (card1) card1.classList.remove("hidden");
+  if (card2) card2.classList.remove("hidden");
+
+  showOptions(scene.options ?? []);
+  return;
+
+
+  // 🔥 langsung tampilkan opsi (biar tombol muncul)
+  showOptions(scene.options ?? []);
+  return; // ❗ PENTING: stop di sini
+}
   // Reset flag quiz & perbarui tombol Rewind
   state.inQuiz = false;
   updateRewindBtn();
