@@ -87,13 +87,14 @@
   <!--
     URUTAN LOAD SCRIPT PENTING!
     engine.js harus dimuat DULU karena mendefinisikan:
-      • state, CONFIG, DOM  → dipakai quiz.js
-      • cancelTyping, typewriter, showOptions, dll
+      • state, CONFIG, DOM  → dipakai quiz.js.
+      • cancelTyping, typewriter, showOptions, dll.
     quiz.js dimuat SETELAH karena bergantung pada hal di atas.
     Keduanya baru dieksekusi setelah halaman selesai dimuat (DOMContentLoaded).
   -->
   <script src="engine.js"></script>
   <script src="quiz.js"></script>
+
 
 </body>
 </html>

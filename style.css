@@ -145,10 +145,12 @@ html, body {
     var(--clr-overlay-bot) 100%
   );
 }
+
 .no-ui #vn-overlay,
 .no-ui #vn-grain {
   display: none ;
 }
+
 .no-ui #text-box {
   display: none;
   box-shadow: none;
@@ -161,6 +163,7 @@ html, body {
 .no-ui #dialog-area {
   display: none;
 }
+
 /* tombol tetap hidup */
 .no-ui #options-wrap {
   display: flex;

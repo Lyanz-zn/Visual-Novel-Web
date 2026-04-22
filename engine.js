@@ -43,6 +43,7 @@ const state = {
   isTyping      : false,  // True jika animasi typewriter sedang berjalan
   typingTimer   : null,   // Referensi ID dari setTimeout (agar bisa di-cancel)
   inQuiz        : false,  // True jika engine sedang dalam mode quiz
+  dialogIndex   : 0,      // Index dialog yang sedang aktif di dalam array dialog scene
 };
 
 
@@ -138,6 +139,7 @@ function renderSceneDirect(sceneId) {
   _applyScene(scene);
 }
 
+
 // Fungsi internal: menerapkan semua elemen scene ke UI.
 // Tidak perlu dipanggil dari luar, gunakan renderScene() atau renderSceneDirect().
 function _applyScene(scene) {
@@ -148,11 +150,17 @@ function _applyScene(scene) {
   clearOptions();
 
   if (scene.hideUI) {
-  document.body.classList.add('no-ui');
+document.body.classList.add('no-ui');
 } else {
   document.body.classList.remove('no-ui');
 }
+
+// Mengambil kode dari S-hafidz
 const cards = document.querySelectorAll(".card");
+
+// Mengambil kode dari main
+// Reset index dialog ke awal scene
+state.dialogIndex = 0;
 
 // reset semua card
 cards.forEach(c => c.classList.add("hidden"));
@@ -189,19 +197,80 @@ if (scene.layout === "card") {
 
   // ── Cek tipe scene ──
   if (scene.type === 'quiz') {
-    // Scene quiz: tampilkan dialog intro → lalu tombol "Mulai Test!"
-    // Data quizId dan onComplete ada di scene JSON
-    typewriter(scene.dialog ?? 'Siap untuk test?', () => {
-      // Tombol khusus yang menandai _isQuizStart untuk handler di showOptions
+    // Scene quiz: ambil baris pertama dialog, animasikan, lalu tombol "Mulai Test!"
+    const lines = getDialogLines(scene);
+    renderDialogLine(lines, 0, () => {
       showOptions([{ label: '✏️   Mulai Test!', _isQuizStart: true }], scene);
     });
     return;
   }
 
-  // ── Scene biasa: tampilkan dialog → lalu opsi ──
-  typewriter(scene.dialog ?? '', () => {
-    showOptions(scene.options ?? []);
+  // ── Scene biasa: mulai dari baris dialog index 0 ──
+  // ── Scene biasa ──
+  const lines = getDialogLines(scene);
+
+  if (scene.hideUI) {
+      // Jika UI disembunyikan, langsung munculkan opsi tanpa animasi teks
+      showOptions(scene.options ?? []);
+  } else {
+      // Jika UI ada, ketik dulu baru munculkan opsi
+      renderDialogLine(lines, 0, () => {
+          showOptions(scene.options ?? []);
+      });
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// NORMALISASI DIALOG
+// Memastikan field "dialog" selalu berupa array of strings,
+// apapun formatnya di JSON.
+//
+// Format yang didukung:
+//   String tunggal → dibungkus jadi array 1 elemen (kompatibilitas mundur)
+//   Array of strings → langsung dipakai
+//
+// Contoh:
+//   "dialog": "Halo!"              → ["Halo!"]
+//   "dialog": ["Halo!", "Apa kabar?"] → ["Halo!", "Apa kabar?"]
+// ─────────────────────────────────────────────────────────────
+function getDialogLines(scene) {
+  const raw = scene.dialog;
+  if (!raw) return [''];
+  return Array.isArray(raw) ? raw : [raw];
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER SATU BARIS DIALOG
+// Menampilkan teks pada index tertentu dengan animasi typewriter.
+// Setelah selesai (typewriter tuntas), kursor berkedip muncul.
+// Klik selanjutnya ditangani oleh handleTextBoxClick().
+//
+// Parameter:
+//   lines      → array string hasil getDialogLines()
+//   index      → index baris yang akan ditampilkan sekarang
+//   onFinished → fungsi yang dipanggil setelah SEMUA baris habis
+//                (yaitu saat opsi harus ditampilkan)
+// ─────────────────────────────────────────────────────────────
+function renderDialogLine(lines, index, onFinished) {
+  state.dialogIndex = index;
+
+  const text = lines[index] ?? '';
+  const isLast = (index === lines.length - 1);
+
+  typewriter(text, () => {
+    // Typewriter selesai → kursor muncul
+    // Jika ini baris terakhir, onFinished (tampilkan opsi) dipanggil
+    // SETELAH user klik lagi — bukan otomatis langsung.
+    // Logika lanjutnya ada di handleTextBoxClick().
+    if (isLast) {
+      // Simpan callback agar bisa dipanggil saat klik berikutnya
+      state._pendingFinish = onFinished;
+    }
   });
+
+  // Simpan referensi untuk digunakan handleTextBoxClick
+  state._dialogLines    = lines;
+  state._onDialogFinish = onFinished;
 }
 
 
@@ -252,26 +321,48 @@ function cancelTyping() {
   state.isTyping = false;
 }
 
-// Handler klik pada text box:
-// Jika typewriter masih berjalan → langsung tampilkan teks penuh (skip).
-// Jika sudah selesai → tidak melakukan apa-apa.
+// Handler klik pada text box.
+// Logika dua langkah:
+//
+//   LANGKAH 1 — Typewriter masih berjalan:
+//     → Batalkan animasi, cetak teks penuh sekaligus, tampilkan kursor.
+//     → Klik berikutnya akan masuk ke Langkah 2.
+//
+//   LANGKAH 2 — Typewriter sudah selesai (kursor berkedip):
+//     → Jika masih ada baris dialog berikutnya → render baris itu.
+//     → Jika ini baris terakhir → panggil _onDialogFinish (tampilkan opsi).
 function handleTextBoxClick() {
-  if (!state.isTyping) return;
+  // Delegasikan ke quiz jika sedang dalam mode quiz
+  if (state.inQuiz) {
+    if (state.isTyping) skipQuizTypewriter();
+    return;
+  }
 
-  const scene = state.script.scenes?.[state.currentSceneId];
-  if (!scene) return;
+  const lines = state._dialogLines;
+  if (!lines) return;
 
-  cancelTyping();
+  // ── LANGKAH 1: skip typewriter yang sedang berjalan ──
+  if (state.isTyping) {
+    cancelTyping();
+    DOM.dialogText().textContent = lines[state.dialogIndex] ?? '';
+    DOM.textCursor().style.display = 'inline';
+    return; // Klik berikutnya tangani di Langkah 2
+  }
 
-  // Langsung tampilkan seluruh teks sekaligus
-  DOM.dialogText().textContent = scene.dialog ?? '';
-  DOM.textCursor().style.display = 'inline';
+  // ── LANGKAH 2: typewriter sudah selesai, tentukan aksi berikutnya ──
+  const nextIndex = state.dialogIndex + 1;
 
-  // Tampilkan opsi yang sesuai
-  if (scene.type === 'quiz') {
-    showOptions([{ label: '✏️   Mulai Test!', _isQuizStart: true }], scene);
+  if (nextIndex < lines.length) {
+    // Masih ada baris → maju ke baris berikutnya
+    renderDialogLine(lines, nextIndex, state._onDialogFinish);
   } else {
-    showOptions(scene.options ?? []);
+    // Semua baris sudah habis → panggil callback (tampilkan opsi)
+    if (typeof state._onDialogFinish === 'function') {
+      // Sembunyikan kursor sebelum opsi muncul
+      DOM.textCursor().style.display = 'none';
+      state._onDialogFinish();
+      state._onDialogFinish = null; // Bersihkan agar tidak dipanggil dua kali
+    }
   }
 }
 
