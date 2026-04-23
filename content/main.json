@@ -2,34 +2,40 @@
   "_info": "Script utama Visual Novel — English Journey",
   "_catatan": "Field yang diawali _ adalah komentar, diabaikan oleh engine. Hapus setelah paham.",
   "config": {
-    "startScene": "intro"
+    "startScene": "startscreen"
   },
   "scenes": {
-    "intro": {
-      "_comment": "Scene pembuka. 'speaker' kosong = narasi (nameplate tidak muncul). Tidak ada tombol Rewind di sini karena belum ada history.",
-      "background": "assets/bg_intro.jpg",
+    "startscreen": {
+      "background": "assets/bg_menu.jpg",
       "speaker": "",
-      "dialog": "Selamat datang di English Journey.\n\nSebuah perjalanan seru untuk belajar Bahasa Inggris.",
+      "dialog": "",
+      "hideUI": true,
       "options": [
         {
-          "label": "Lanjut  ▶",
-          "next": "intro_2"
+          "label": "▶️  Mulai",
+          "next": "intro"
+        },
+        {
+          "label": "ℹ️  Tentang Kami",
+          "next": "about"
         }
       ]
     },
-    "intro_2": {
+    "intro": {
       "_comment": "Scene kedua intro. Bisa diisi narasi atau dialog karakter.",
       "background": "assets/bg_intro.jpg",
       "speaker": "",
-      "dialog": "Di sini kamu akan belajar Grammar, Vocabulary, dan banyak lagi.\n\nSiap untuk mulai?",
+      "dialog": [
+        "Halo. Selamat datang di **Mentor's Script**.",
+        "Aku akan menjadi mentormu dalam mempelajari bahasa Inggris yang baik dan benar.",
+        "Belajar bahasa bukan hanya soal menghafal, tapi memahami bagaimana setiap kata diletakkan pada tempatnya.",
+        "Di sini, kita akan membedah komponen Grammar, memperluas Vocabulary, dan menguji pemahamanmu.",
+        "Mari kita buka lembaran pertama. Sudah siap untuk mulai belajar?"
+      ],
       "options": [
         {
-          "label": "Siap!",
+          "label": "▶️  Siap!",
           "next": "main_menu"
-        },
-        {
-          "label": "Tentang Aplikasi Ini",
-          "next": "about"
         }
       ]
     },
@@ -52,10 +58,6 @@
           "next": "quiz_entry"
         },
         {
-          "label": "ℹ️   Tentang Kami",
-          "next": "about"
-        },
-        {
           "label": "🚪  Keluar",
           "next": "EXIT"
         }
@@ -71,7 +73,7 @@
       "options": [
         {
           "label": "← Kembali",
-          "next": "main_menu"
+          "next": "startscreen"
         }
       ]
     },
@@ -160,45 +162,6 @@
         {
           "label": "← Kembali ke Menu Utama",
           "next": "main_menu"
-        }
-      ]
-    },
-    "grammar_present": {
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "Present Tense digunakan untuk:\n• Fakta umum: 'The sun rises in the east.'\n• Kebiasaan: 'She reads every morning.'\n• Jadwal: 'The train leaves at 8 AM.'",
-      "options": [
-        {
-          "label": "Rumus Present Tense",
-          "next": "grammar_present_2"
-        },
-        {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
-        }
-      ]
-    },
-    "grammar_present_2": {
-      "_comment": "Isi dengan rumus, latihan, atau materi lanjutan Present Tense.",
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "[Isi dengan rumus atau latihan Present Tense]\n\nContoh rumus:\nS + V1 (+ s/es)  →  She reads | He goes",
-      "options": [
-        {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
-        }
-      ]
-    },
-    "grammar_past": {
-      "_comment": "Isi dengan materi Past Tense.",
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "[Isi dengan materi Past Tense]",
-      "options": [
-        {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
         }
       ]
     },
