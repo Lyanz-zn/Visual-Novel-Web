@@ -279,38 +279,113 @@ function renderDialogLine(lines, index, onFinished) {
 // Menampilkan teks karakter per karakter untuk efek mesin ketik.
 // ═════════════════════════════════════════════════════════════
 
+function tokenize(text) {
+  const tokens = [];
+  const pattern = /\*\*\*([\s\S]+?)\*\*\*|\*\*([\s\S]+?)\*\*|\*([\s\S]+?)\*/gs;
+
+  let lastIndex = 0;
+  let match;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push({ text: text.slice(lastIndex, match.index), bold: false, italic: false });
+    }
+
+    if      (match[1] !== undefined) tokens.push({ text: match[1], bold: true,  italic: true  });
+    else if (match[2] !== undefined) tokens.push({ text: match[2], bold: true,  italic: false });
+    else if (match[3] !== undefined) tokens.push({ text: match[3], bold: false, italic: true  });
+
+    lastIndex = pattern.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    tokens.push({ text: text.slice(lastIndex), bold: false, italic: false });
+  }
+
+  return tokens;
+}
+
+// Buat elemen DOM dari satu token
+function createTokenNode(token) {
+  if (!token.bold && !token.italic) {
+    return document.createTextNode(token.text);
+  }
+  if (token.bold && token.italic) {
+    const strong = document.createElement('strong');
+    const em = document.createElement('em');
+    em.textContent = token.text;
+    strong.appendChild(em);
+    return strong;
+  }
+  const el = document.createElement(token.bold ? 'strong' : 'em');
+  el.textContent = token.text;
+  return el;
+}
+
+// Render teks penuh sekaligus tanpa animasi (dipakai saat skip)
+function renderFull(text) {
+  const el = DOM.dialogText();
+  el.innerHTML = '';
+  tokenize(text).forEach(token => el.appendChild(createTokenNode(token)));
+}
+
 // Parameter:
 //   text       → string yang akan dianimasikan
 //   onComplete → fungsi yang dipanggil setelah semua karakter muncul
 function typewriter(text, onComplete) {
   const el = DOM.dialogText();
-
-  // Kosongkan teks sebelumnya & sembunyikan kursor
-  el.textContent = '';
+  el.innerHTML = '';
   DOM.textCursor().style.display = 'none';
 
+  const tokens = tokenize(text);
   state.isTyping = true;
-  let charIndex = 0;
 
-  // Fungsi rekursif: munculkan 1 karakter, jadwalkan karakter berikutnya
+  let tokenIndex = 0;
+  let charIndex  = 0;
+  let currentNode = null;
+
   function tick() {
-    if (charIndex < text.length) {
-      // Tambahkan satu karakter ke teks yang sudah ada
-      el.textContent += text[charIndex];
-      charIndex++;
-      // setTimeout: jalankan tick() lagi setelah CONFIG.typewriterSpeed ms
-      state.typingTimer = setTimeout(tick, CONFIG.typewriterSpeed);
-    } else {
-      // Semua karakter sudah muncul → animasi selesai
-      state.isTyping = false;
-      DOM.textCursor().style.display = 'inline';  // Tampilkan kursor berkedip
-      if (typeof onComplete === 'function') onComplete();
+    // Lewati token kosong
+    while (tokenIndex < tokens.length && tokens[tokenIndex].text.length === 0) {
+      tokenIndex++;
     }
+
+    if (tokenIndex >= tokens.length) {
+      state.isTyping = false;
+      DOM.textCursor().style.display = 'inline';
+      if (typeof onComplete === 'function') onComplete();
+      return;
+    }
+
+    const token = tokens[tokenIndex];
+
+    // Buat node DOM baru di karakter pertama setiap token
+    if (charIndex === 0) {
+      currentNode = createTokenNode({ ...token, text: '' });
+      el.appendChild(currentNode);
+    }
+
+    // Tambah satu karakter ke node aktif
+    if (currentNode.nodeType === Node.TEXT_NODE) {
+      currentNode.nodeValue += token.text[charIndex];
+    } else if (token.bold && token.italic) {
+      currentNode.firstChild.textContent += token.text[charIndex];
+    } else {
+      currentNode.textContent += token.text[charIndex];
+    }
+
+    charIndex++;
+
+    if (charIndex >= token.text.length) {
+      tokenIndex++;
+      charIndex = 0;
+    }
+
+    state.typingTimer = setTimeout(tick, CONFIG.typewriterSpeed);
   }
 
-  tick(); // Mulai animasi
+  tick();
 }
-
 // Membatalkan animasi typewriter yang sedang berjalan.
 // Dipanggil saat user klik untuk skip, atau saat pindah scene.
 function cancelTyping() {
@@ -344,7 +419,7 @@ function handleTextBoxClick() {
   // ── LANGKAH 1: skip typewriter yang sedang berjalan ──
   if (state.isTyping) {
     cancelTyping();
-    DOM.dialogText().textContent = lines[state.dialogIndex] ?? '';
+    renderFull(lines[state.dialogIndex] ?? '');
     DOM.textCursor().style.display = 'inline';
     return; // Klik berikutnya tangani di Langkah 2
   }

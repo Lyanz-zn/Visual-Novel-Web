@@ -241,7 +241,7 @@ function skipQuizTypewriter() {
   // Bangun ulang teks soal lengkap (sama persis seperti di renderQuestion)
   const current = quizState.currentIndex + 1;
   const total   = quizState.questions.length;
-  DOM.dialogText().textContent = `[${current}/${total}]   ${question.question}`;
+  renderFull(`[${current}/${total}]   ${question.question}`);
   DOM.textCursor().style.display = 'none'; // Kursor tidak perlu muncul di soal
 
   // Langsung tampilkan pilihan jawaban
