@@ -2,34 +2,40 @@
   "_info": "Script utama Visual Novel — English Journey",
   "_catatan": "Field yang diawali _ adalah komentar, diabaikan oleh engine. Hapus setelah paham.",
   "config": {
-    "startScene": "intro"
+    "startScene": "startscreen"
   },
   "scenes": {
-    "intro": {
-      "_comment": "Scene pembuka. 'speaker' kosong = narasi (nameplate tidak muncul). Tidak ada tombol Rewind di sini karena belum ada history.",
-      "background": "assets/bg_intro.jpg",
+    "startscreen": {
+      "background": "assets/bg_menu.jpg",
       "speaker": "",
-      "dialog": "Selamat datang di English Journey.\n\nSebuah perjalanan seru untuk belajar Bahasa Inggris.",
+      "dialog": "",
+      "hideUI": true,
       "options": [
         {
-          "label": "Lanjut  ▶",
-          "next": "intro_2"
+          "label": "▶️  Mulai",
+          "next": "intro"
+        },
+        {
+          "label": "ℹ️  Tentang Kami",
+          "next": "about"
         }
       ]
     },
-    "intro_2": {
+    "intro": {
       "_comment": "Scene kedua intro. Bisa diisi narasi atau dialog karakter.",
       "background": "assets/bg_intro.jpg",
       "speaker": "",
-      "dialog": "Di sini kamu akan belajar Grammar, Vocabulary, dan banyak lagi.\n\nSiap untuk mulai?",
+      "dialog": [
+        "Halo. Selamat datang di **Mentor's Script**.",
+        "Aku akan menjadi mentormu dalam mempelajari bahasa Inggris yang baik dan benar.",
+        "Belajar bahasa bukan hanya soal menghafal, tapi memahami bagaimana setiap kata diletakkan pada tempatnya.",
+        "Di sini, kita akan membedah komponen Grammar, memperluas Vocabulary, dan menguji pemahamanmu.",
+        "Mari kita buka lembaran pertama. Sudah siap untuk mulai belajar?"
+      ],
       "options": [
         {
-          "label": "Siap!",
+          "label": "▶️  Siap!",
           "next": "main_menu"
-        },
-        {
-          "label": "Tentang Aplikasi Ini",
-          "next": "about"
         }
       ]
     },
@@ -41,7 +47,7 @@
       "options": [
         {
           "label": "📖  Grammar",
-          "next": "grammar_intro"
+          "next": "Grammar"
         },
         {
           "label": "📚  Vocabulary",
@@ -50,10 +56,6 @@
         {
           "label": "✏️   Mulai Test",
           "next": "quiz_entry"
-        },
-        {
-          "label": "ℹ️   Tentang Kami",
-          "next": "about"
         },
         {
           "label": "🚪  Keluar",
@@ -71,27 +73,30 @@
       "options": [
         {
           "label": "← Kembali",
-          "next": "main_menu"
+          "next": "startscreen"
         }
       ]
     },
-    "grammar_intro": {
-      "_comment": "Landing page untuk topik Grammar. Tambah opsi sesuai sub-topik yang kamu inginkan.",
+    "Grammar": {
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "Grammar adalah fondasi dari Bahasa Inggris. Tanpa grammar yang baik, kalimat bisa terdengar janggal.\n\nMau belajar apa dulu?",
+      "dialog": [
+        "Pernah mendengar istilah **Grammar**? Secara sederhana, grammar adalah aturan yang digunakan untuk menyusun kata menjadi kalimat yang jelas dan bermakna.",
+        "Dalam Bahasa Indonesia, aturan seperti ini sering terasa lebih fleksibel. Namun dalam Bahasa Inggris, susunan kata dan bentuk kata biasanya lebih teratur serta konsisten.",
+        "Contohnya: *She goes to school* adalah bentuk yang **benar**, sedangkan *She go to school* dianggap **kurang tepat** dalam konteks tertentu.",
+        "Perbedaannya terlihat kecil, tetapi grammar yang tepat sangat penting agar kalimat terdengar alami dan mudah dipahami.",
+        "Bagian dalam **Grammar** cukup luas, misalnya ada **Noun**, **Verb**, **Adjective**, **Tenses**, dan masih banyak lagi.",
+        "Untuk saat ini, kita akan fokus pada dua dasar penting terlebih dahulu, yaitu **Tenses Dasar** dan **Sentence Building**.",
+        "Bagian apa yang ingin kamu perlajari terlebih dahulu?."
+      ],
       "options": [
         {
-          "label": "Apa itu Grammar?",
-          "next": "grammar_what"
+          "label": "Tenses Dasar",
+          "next": "Tenses"
         },
         {
-          "label": "Present Tense",
-          "next": "grammar_present"
-        },
-        {
-          "label": "Past Tense",
-          "next": "grammar_past"
+          "label": "Building Sentence",
+          "next": "Sentence"
         },
         {
           "label": "← Menu Utama",
@@ -99,69 +104,64 @@
         }
       ]
     },
-    "grammar_what": {
+    "Tenses": {
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "Grammar adalah aturan yang mengatur bagaimana kata-kata disusun menjadi kalimat yang benar dan bermakna.\n\nSingkatnya: grammar = aturan bermain bahasa!",
+      "dialog": [
+        "Sekarang kita masuk ke materi **Tenses Dasar**. Secara sederhana, **Tenses** adalah bentuk kata kerja yang digunakan untuk menunjukkan waktu terjadinya suatu kejadian.",
+        "Dengan memahami tenses, kamu bisa menjelaskan apakah sesuatu terjadi sekarang, sudah terjadi di masa lalu, atau akan terjadi nanti.",
+        "Kita mulai dari **Simple Present Tense**. Tense ini digunakan untuk kebiasaan, fakta umum, atau rutinitas sehari-hari.",
+        "**Rumus:** **Subject + Verb 1**\n\nUntuk **He, She, It**, kata kerja biasanya ditambah ***-s*** atau ***-es***.",
+        "Contoh:\n*I eat breakfast every day.*\n*She eats breakfast every day.*",
+        "Berikutnya adalah **Simple Past Tense**. Tense ini digunakan untuk kejadian yang sudah selesai di masa lalu.",
+        "**Rumus:** **Subject + Verb 2**",
+        "Contoh:\n*I ate breakfast yesterday.*\n\nKata kerja ***eat*** berubah menjadi ***ate*** karena kejadiannya sudah lewat.",
+        "Selanjutnya, **Simple Future Tense**. Tense ini digunakan untuk rencana, janji, atau hal yang akan terjadi di masa depan.",
+        "**Rumus:** **Subject + will + Verb 1**",
+        "Contoh:\n*I will eat breakfast tomorrow.*\n\nCukup tambahkan ***will*** sebelum kata kerja dasar.",
+        "Jadi perbedaannya seperti ini:\n\n***eat*** = sekarang\n***ate*** = dulu\n***will eat*** = nanti",
+        "Jika kamu memahami waktu kejadiannya, memilih tense yang tepat akan menjadi jauh lebih mudah.",
+        "Sekarang kamu mau apa?"
+      ],
       "options": [
         {
-          "label": "Contoh lebih lanjut",
-          "next": "grammar_what_2"
+          "label": "← Kembali ke Grammar",
+          "next": "Grammar"
         },
         {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
+          "label": "← Kembali ke Menu Utama",
+          "next": "main_menu"
         }
       ]
     },
-    "grammar_what_2": {
+    "Sentence": {
       "_comment": "Isi dengan contoh atau penjelasan lanjutan.",
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "[Isi dengan penjelasan atau contoh lanjutan tentang Grammar]",
+      "dialog": [
+        "Sekarang kita akan belajar cara menyusun kalimat dalam Bahasa Inggris. Pola dasar yang paling umum digunakan adalah **Subject + Verb + Object** atau **SVO**.",
+        "Kita mulai dari **Subject** (*Subjek*). Subject adalah orang, hewan, benda, atau siapa pun yang melakukan tindakan dalam kalimat.",
+        "Contoh Subject: ***I, You, We, They, He, She, It***, atau nama seperti **Budi** dan **Sarah**.",
+        "Bagian berikutnya adalah **Verb** (*Kata Kerja*). Verb menjelaskan tindakan yang dilakukan oleh subject.",
+        "Contoh Verb: ***eat, read, play, study, watch, open***.",
+        "Lalu ada **Object** (*Objek*). Object adalah sesuatu yang menerima tindakan dari subject.",
+        "Contoh: *I read a book.*\n\nDi kalimat ini, ***a book*** adalah object karena dibaca oleh *I*.",
+        "Sekarang mari kita gabungkan pola dasarnya.\n\n***She (S) + reads (V) + a book (O).***",
+        "Hasilnya menjadi kalimat lengkap:\n\n*She reads a book.*",
+        "Contoh lainnya:\n\n***They play football.***\n***He drinks water.***\n***We watch movies.***",
+        "Urutan kata dalam Bahasa Inggris cukup penting. Biasanya **Subject** diletakkan di awal, kemudian **Verb**, lalu **Object**.",
+        "Jadi bukan *Book reads she*, melainkan ***She reads a book.***",
+        "Ingat: untuk membuat kalimat sederhana, kamu bisa mulai dengan pola **SVO**. Subject melakukan Verb kepada Object.",
+        "Sekarang kamu mau apa?."
+      ],
       "options": [
         {
           "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
-        }
-      ]
-    },
-    "grammar_present": {
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "Present Tense digunakan untuk:\n• Fakta umum: 'The sun rises in the east.'\n• Kebiasaan: 'She reads every morning.'\n• Jadwal: 'The train leaves at 8 AM.'",
-      "options": [
-        {
-          "label": "Rumus Present Tense",
-          "next": "grammar_present_2"
+          "next": "Grammar"
         },
         {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
-        }
-      ]
-    },
-    "grammar_present_2": {
-      "_comment": "Isi dengan rumus, latihan, atau materi lanjutan Present Tense.",
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "[Isi dengan rumus atau latihan Present Tense]\n\nContoh rumus:\nS + V1 (+ s/es)  →  She reads | He goes",
-      "options": [
-        {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
-        }
-      ]
-    },
-    "grammar_past": {
-      "_comment": "Isi dengan materi Past Tense.",
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": "[Isi dengan materi Past Tense]",
-      "options": [
-        {
-          "label": "← Kembali ke Grammar",
-          "next": "grammar_intro"
+          "label": "← Kembali ke Menu Utama",
+          "next": "main_menu"
         }
       ]
     },
