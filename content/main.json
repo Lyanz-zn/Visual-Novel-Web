@@ -1,6 +1,4 @@
 {
-  "_info": "Script utama Visual Novel — English Journey",
-  "_catatan": "Field yang diawali _ adalah komentar, diabaikan oleh engine. Hapus setelah paham.",
   "config": {
     "startScene": "startscreen"
   },
@@ -22,12 +20,9 @@
       ]
     },
     "intro": {
-      "_comment": "Scene kedua intro. Bisa diisi narasi atau dialog karakter.",
       "background": "assets/bg_intro.jpg",
       "speaker": "",
       "dialog": [
-        "Halo. Selamat datang di **Mentor's Script**.",
-        "Aku akan menjadi mentormu dalam mempelajari bahasa Inggris yang baik dan benar.",
         "Belajar bahasa bukan hanya soal menghafal, tapi memahami bagaimana setiap kata diletakkan pada tempatnya.",
         "Di sini, kita akan membedah komponen Grammar, memperluas Vocabulary, dan menguji pemahamanmu.",
         "Mari kita buka lembaran pertama. Sudah siap untuk mulai belajar?"
@@ -40,9 +35,8 @@
       ]
     },
     "main_menu": {
-      "_comment": "Menu utama. User akan selalu kembali ke sini setelah menyelesaikan materi atau quiz. Opsi 'EXIT' memicu konfirmasi keluar.",
       "background": "assets/bg_menu.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": "Mau mulai belajar dari mana?",
       "options": [
         {
@@ -64,7 +58,6 @@
       ]
     },
     "about": {
-      "_comment": "Halaman tentang. Ganti isi dialog sesuai kebutuhan.",
       "background": "assets/bg_menu.jpg",
       "speaker": "",
       "dialog": "",
@@ -79,7 +72,7 @@
     },
     "Grammar": {
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Pernah mendengar istilah **Grammar**? Secara sederhana, grammar adalah aturan yang digunakan untuk menyusun kata menjadi kalimat yang jelas dan bermakna.",
         "Dalam Bahasa Indonesia, aturan seperti ini sering terasa lebih fleksibel. Namun dalam Bahasa Inggris, susunan kata dan bentuk kata biasanya lebih teratur serta konsisten.",
@@ -106,7 +99,7 @@
     },
     "Tenses": {
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Sekarang kita masuk ke materi **Tenses Dasar**. Secara sederhana, **Tenses** adalah bentuk kata kerja yang digunakan untuk menunjukkan waktu terjadinya suatu kejadian.",
         "Dengan memahami tenses, kamu bisa menjelaskan apakah sesuatu terjadi sekarang, sudah terjadi di masa lalu, atau akan terjadi nanti.",
@@ -125,6 +118,10 @@
       ],
       "options": [
         {
+          "label": "Building Sentence",
+          "next": "Sentence"
+        },
+        {
           "label": "← Kembali ke Grammar",
           "next": "Grammar"
         },
@@ -135,9 +132,8 @@
       ]
     },
     "Sentence": {
-      "_comment": "Isi dengan contoh atau penjelasan lanjutan.",
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Sekarang kita akan belajar cara menyusun kalimat dalam Bahasa Inggris. Pola dasar yang paling umum digunakan adalah **Subject + Verb + Object** atau **SVO**.",
         "Kita mulai dari **Subject** (*Subjek*). Subject adalah orang, hewan, benda, atau siapa pun yang melakukan tindakan dalam kalimat.",
@@ -156,6 +152,10 @@
       ],
       "options": [
         {
+          "label": "Tenses Dasar",
+          "next": "Tenses"
+        },
+        {
           "label": "← Kembali ke Grammar",
           "next": "Grammar"
         },
@@ -166,9 +166,8 @@
       ]
     },
     "vocab": {
-      "_comment": "Landing page untuk topik Vocabulary. Isi sub-topik sesuai kebutuhan.",
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Sekarang kita akan belajar **Vocabulary** melalui *kalimat yang sering digunakan sehari-hari*.",
         "Dalam percakapan, kita jarang mengucapkan kata secara terpisah.",
@@ -206,7 +205,7 @@
     },
     "vocab_intro": {
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Mari mulai dari situasi yang paling umum: *perkenalan*.",
         "Saat bertemu orang baru, ada beberapa kalimat yang sering digunakan.",
@@ -224,14 +223,22 @@
       ],
       "options": [
         {
+          "label": "Kalimat Sehari-hari",
+          "next": "vocab_daily"
+        },
+        {
           "label": "← Kembali ke Vocabulary",
           "next": "vocab"
+        },
+        {
+          "label": "← Kembali ke Menu Utama",
+          "next": "main_menu"
         }
       ]
     },
     "vocab_daily": {
       "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
+      "speaker": "",
       "dialog": [
         "Sekarang kita akan belajar **Vocabulary** melalui *percakapan sehari-hari*.",
         "Dalam kehidupan nyata, kita tidak berbicara kata per kata.",
@@ -262,13 +269,20 @@
       ],
       "options": [
         {
+          "label": "Perkenalan",
+          "next": "vocab_intro"
+        },
+        {
           "label": "← Kembali ke Vocabulary",
           "next": "vocab"
+        },
+        {
+          "label": "← Kembali ke Menu Utama",
+          "next": "main_menu"
         }
       ]
     },
     "quiz_entry": {
-      "_comment": "Scene khusus untuk masuk ke mode quiz. 'type': 'quiz' memberitahu engine untuk menampilkan tombol 'Mulai Test!' setelah dialog selesai. 'quizId' menunjuk ke data quiz di bawah. 'onComplete' adalah scene yang ditampilkan setelah quiz selesai.",
       "background": "assets/bg_quiz.jpg",
       "speaker": "",
       "dialog": "Kamu akan diberikan beberapa soal pilihan ganda.\nUrutan soal akan diacak setiap sesi.\n\nSiap?",
@@ -279,7 +293,6 @@
   },
   "quizzes": {
     "quiz_grammar": {
-      "_comment": "Template quiz. Tambahkan soal di array 'questions'. 'shuffle': true akan mengacak urutan soal setiap sesi. 'onComplete' adalah fallback jika tidak ada di scene.",
       "title": "Test Grammar",
       "shuffle": true,
       "onComplete": "main_menu",
