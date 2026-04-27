@@ -19,7 +19,7 @@ const CONFIG = {
   // 10  = sangat cepat
   // 30  = normal (default)
   // 60  = pelan, dramatis
-  typewriterSpeed: 30,
+  typewriterSpeed: 20,
 
   // Path ke file JSON yang berisi semua scene dan quiz.
   // Ganti jika nama atau lokasi file berbeda.
