@@ -199,10 +199,6 @@
           "next": "vocab_daily"
         },
         {
-          "label": "Situasi/Perasaan",
-          "next": "vocab_emotion"
-        },
-        {
           "label": "← Menu Utama",
           "next": "main_menu"
         }
@@ -263,27 +259,6 @@
         "Semakin sering kamu melihat dan membaca kalimat seperti ini,",
         "semakin mudah kamu menggunakannya dalam percakapan.",
         "Sekarang kamu ingin lanjut ke bagian mana?"
-      ],
-      "options": [
-        {
-          "label": "← Kembali ke Vocabulary",
-          "next": "vocab"
-        }
-      ]
-    },
-    "vocab_emotion": {
-      "background": "assets/bg_study.jpg",
-      "speaker": "Guide",
-      "dialog": [
-        "Sekarang kita masuk ke aktivitas sehari-hari.",
-        "Beberapa kata kerja yang sering digunakan adalah **eat**, **go**, **study**, dan **sleep**.",
-        "*Eat* berarti \"makan\", dan *study* berarti \"belajar\".",
-        "Contoh penggunaan:",
-        "*I eat breakfast every morning.*",
-        "*They study at school.*",
-        "Kata kerja seperti ini sering muncul dalam percakapan sehari-hari.",
-        "Memahami kata-kata ini akan sangat membantu dalam komunikasi dasar.",
-        "Sekarang coba perhatikan contoh berikut."
       ],
       "options": [
         {
