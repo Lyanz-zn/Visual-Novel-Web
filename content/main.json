@@ -51,7 +51,7 @@
         },
         {
           "label": "📚  Vocabulary",
-          "next": "vocab_intro"
+          "next": "vocab"
         },
         {
           "label": "✏️   Mulai Test",
@@ -165,19 +165,42 @@
         }
       ]
     },
-    "vocab_intro": {
+    "vocab": {
       "_comment": "Landing page untuk topik Vocabulary. Isi sub-topik sesuai kebutuhan.",
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "Vocabulary adalah kosakata — semakin banyak kamu tahu, semakin mudah berbicara dan menulis!\n\nMau mulai dari mana?",
+      "dialog": [
+        "Sekarang kita akan belajar **Vocabulary** melalui *kalimat yang sering digunakan sehari-hari*.",
+        "Dalam percakapan, kita jarang mengucapkan kata secara terpisah.",
+        "Biasanya, kita langsung menggunakan *kalimat utuh* yang sudah terbiasa digunakan.",
+        "Dengan memahami kalimat, kamu bisa sekaligus belajar arti dan cara penggunaannya.",
+        "Mari kita lihat beberapa contoh sederhana.",
+        "*How are you?* berarti \"Apa kabar?\".",
+        "Kalimat ini sering digunakan saat bertemu seseorang.",
+        "*I'm fine* berarti \"Saya baik-baik saja\".",
+        "Biasanya digunakan sebagai respon dari *How are you?*.",
+        "*Thank you* berarti \"Terima kasih\".",
+        "Digunakan saat menerima bantuan atau sesuatu dari orang lain.",
+        "*Excuse me* bisa berarti \"Permisi\" atau \"Maaf\".",
+        "Maknanya bisa berubah tergantung situasi.",
+        "Perhatikan bahwa kamu tidak perlu memahami setiap kata secara terpisah.",
+        "Cukup pahami makna kalimat secara keseluruhan.",
+        "Semakin sering kamu melihat dan membaca kalimat seperti ini,",
+        "semakin mudah kamu menggunakannya dalam percakapan.",
+        "Sekarang kamu ingin lanjut ke bagian mana?"
+      ],
       "options": [
         {
-          "label": "[Topik Vocab 1]",
-          "next": "vocab_topic_1"
+          "label": "Perkenalan",
+          "next": "vocab_intro"
         },
         {
-          "label": "[Topik Vocab 2]",
-          "next": "vocab_topic_2"
+          "label": "Kalimat Sehari-hari",
+          "next": "vocab_daily"
+        },
+        {
+          "label": "Situasi/Perasaan",
+          "next": "vocab_emotion"
         },
         {
           "label": "← Menu Utama",
@@ -185,26 +208,87 @@
         }
       ]
     },
-    "vocab_topic_1": {
-      "_comment": "Ganti nama scene dan isi sesuai topik vocabulary yang kamu inginkan.",
+    "vocab_intro": {
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "[Isi dengan materi Vocabulary Topik 1]",
+      "dialog": [
+        "Mari mulai dari situasi yang paling umum: *perkenalan*.",
+        "Saat bertemu orang baru, ada beberapa kalimat yang sering digunakan.",
+        "*My name is Lina* berarti \"Nama saya Lina\".",
+        "Kalimat ini digunakan untuk memperkenalkan nama.",
+        "*I am a student* berarti \"Saya seorang pelajar\".",
+        "Digunakan untuk memberikan informasi tentang diri sendiri.",
+        "*She is my friend* berarti \"Dia adalah temanku\".",
+        "Digunakan untuk memperkenalkan orang lain.",
+        "Perhatikan bahwa kalimat-kalimat ini sering digunakan dalam kehidupan sehari-hari.",
+        "Kamu tidak perlu menghafalnya secara terpisah.",
+        "Cukup pahami pola dan penggunaannya dalam situasi nyata.",
+        "Dengan cara ini, vocabulary akan terasa lebih mudah dipahami.",
+        "Sekarang kamu ingin lanjut ke bagian mana?"
+      ],
       "options": [
         {
           "label": "← Kembali ke Vocabulary",
-          "next": "vocab_intro"
+          "next": "vocab"
         }
       ]
     },
-    "vocab_topic_2": {
+    "vocab_daily": {
       "background": "assets/bg_study.jpg",
       "speaker": "Guide",
-      "dialog": "[Isi dengan materi Vocabulary Topik 2]",
+      "dialog": [
+        "Sekarang kita akan belajar **Vocabulary** melalui *percakapan sehari-hari*.",
+        "Dalam kehidupan nyata, kita tidak berbicara kata per kata.",
+        "Kita menggunakan *kalimat utuh* yang sudah terbiasa diucapkan.",
+        "Dengan memahami kalimat, kamu bisa langsung menggunakannya dalam situasi nyata.",
+        "Mari kita mulai dari beberapa contoh yang sering digunakan.",
+        "*Good morning* berarti \"Selamat pagi\".",
+        "Digunakan saat bertemu seseorang di pagi hari.",
+        "*How are you?* berarti \"Apa kabar?\".",
+        "Biasanya digunakan saat menyapa seseorang.",
+        "*I'm fine* berarti \"Saya baik-baik saja\".",
+        "Sering digunakan sebagai respon dari *How are you?*.",
+        "*Thank you* berarti \"Terima kasih\".",
+        "Digunakan saat menerima bantuan atau sesuatu dari orang lain.",
+        "*You're welcome* berarti \"Sama-sama\".",
+        "Digunakan sebagai respon dari *Thank you*.",
+        "*Excuse me* bisa berarti \"Permisi\" atau \"Maaf\".",
+        "Digunakan saat ingin bertanya atau melewati seseorang.",
+        "*See you later* berarti \"Sampai jumpa nanti\".",
+        "Digunakan saat berpisah dengan seseorang.",
+        "Perhatikan bahwa kalimat-kalimat ini sering muncul secara berpasangan.",
+        "Misalnya: *How are you?* dan *I'm fine*, atau *Thank you* dan *You're welcome*.",
+        "Kamu tidak perlu menerjemahkan setiap kata secara terpisah.",
+        "Cukup pahami maknanya sebagai satu kesatuan.",
+        "Semakin sering kamu melihat dan membaca kalimat seperti ini,",
+        "semakin mudah kamu menggunakannya dalam percakapan.",
+        "Sekarang kamu ingin lanjut ke bagian mana?"
+      ],
       "options": [
         {
           "label": "← Kembali ke Vocabulary",
-          "next": "vocab_intro"
+          "next": "vocab"
+        }
+      ]
+    },
+    "vocab_emotion": {
+      "background": "assets/bg_study.jpg",
+      "speaker": "Guide",
+      "dialog": [
+        "Sekarang kita masuk ke aktivitas sehari-hari.",
+        "Beberapa kata kerja yang sering digunakan adalah **eat**, **go**, **study**, dan **sleep**.",
+        "*Eat* berarti \"makan\", dan *study* berarti \"belajar\".",
+        "Contoh penggunaan:",
+        "*I eat breakfast every morning.*",
+        "*They study at school.*",
+        "Kata kerja seperti ini sering muncul dalam percakapan sehari-hari.",
+        "Memahami kata-kata ini akan sangat membantu dalam komunikasi dasar.",
+        "Sekarang coba perhatikan contoh berikut."
+      ],
+      "options": [
+        {
+          "label": "← Kembali ke Vocabulary",
+          "next": "vocab"
         }
       ]
     },
@@ -212,7 +296,7 @@
       "_comment": "Scene khusus untuk masuk ke mode quiz. 'type': 'quiz' memberitahu engine untuk menampilkan tombol 'Mulai Test!' setelah dialog selesai. 'quizId' menunjuk ke data quiz di bawah. 'onComplete' adalah scene yang ditampilkan setelah quiz selesai.",
       "background": "assets/bg_quiz.jpg",
       "speaker": "",
-      "dialog": "Saatnya uji kemampuan kamu!\n\nKamu akan diberikan beberapa soal pilihan ganda.\nUrutan soal akan diacak setiap sesi.\n\nSiap?",
+      "dialog": "Kamu akan diberikan beberapa soal pilihan ganda.\nUrutan soal akan diacak setiap sesi.\n\nSiap?",
       "type": "quiz",
       "quizId": "quiz_grammar",
       "onComplete": "main_menu"
@@ -273,6 +357,56 @@
             "does",
             "did",
             "done"
+          ],
+          "correct": 2
+        },
+        {
+          "question": "Kamu bertemu teman di pagi hari. Dia berkata: \"Good morning\". Apa respon yang paling tepat?",
+          "choices": [
+            "Good night",
+            "Good morning",
+            "See you later",
+            "Thank you"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Seseorang bertanya: \"How are you?\". Kamu ingin menjawab bahwa kamu baik-baik saja. Apa yang kamu katakan?",
+          "choices": [
+            "I'm fine",
+            "Excuse me",
+            "See you later",
+            "You're welcome"
+          ],
+          "correct": 0
+        },
+        {
+          "question": "Kamu baru saja dibantu oleh seseorang. Kamu ingin mengucapkan terima kasih dalam Bahasa Inggris. Apa yang kamu ucapkan?",
+          "choices": [
+            "Excuse me",
+            "Thank you",
+            "How are you?",
+            "Good morning"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Seseorang mengatakan \"Thank you\" kepadamu. Apa respon yang paling sesuai?",
+          "choices": [
+            "I'm fine",
+            "Good morning",
+            "You're welcome",
+            "See you later"
+          ],
+          "correct": 2
+        },
+        {
+          "question": "Kamu ingin pergi dan berpamitan. Kalimat mana yang paling tepat digunakan?",
+          "choices": [
+            "Excuse me",
+            "How are you?",
+            "See you later",
+            "I'm fine"
           ],
           "correct": 2
         }
