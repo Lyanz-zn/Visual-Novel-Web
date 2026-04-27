@@ -1,100 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>English Journey</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Journey</title>
 
-  <!-- Google Fonts:
-       Cinzel   → nama speaker (serif caps, berkesan elegan)
-       Lora     → teks dialog  (serif, nyaman dibaca)
-       Outfit   → tombol & UI  (sans-serif modern)              -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <!-- ═══════════════════════════════════════════════════════
-       Container utama. Semua lapisan (layer) VN ada di sini.
-       Layer diatur via z-index di CSS.
-       ═══════════════════════════════════════════════════════ -->
-  <div id="vn-container">
-    <div id="about-card-1" class="card hidden">
-      <h1>Muhamad Sultan Hafidz</h1>
-      <br>
-      <p>Nim: 146251021</p>
-    </div>
+  <body>
+    <div id="vn-container">
+      <div id="about-card-1" class="card hidden">
+        <h1>Muhamad Sultan Hafidz</h1>
+        <br />
+        <p>Nim: 146251021</p>
+      </div>
 
-    <div id="about-card-2" class="card hidden">
-      <h1>Juliantoro</h1>
-      <br>
-      <p>Nim: 146251016</p>
-    </div>
+      <div id="about-card-2" class="card hidden">
+        <h1>Juliantoro</h1>
+        <br />
+        <p>Nim: 146251016</p>
+      </div>
 
-    <!-- LAYER 1: Gambar latar belakang (dikendalikan engine.js) -->
-    <div id="vn-bg"></div>
+      <div id="vn-bg"></div>
 
-    <!-- LAYER 2: Film grain — efek tekstur sinematik (bisa dihapus) -->
-    <div id="vn-grain"></div>
+      <div id="vn-grain"></div>
 
-    <!-- LAYER 3: Gradient gelap di bagian bawah layar
-         agar teks dialog tetap mudah terbaca -->
-    <div id="vn-overlay"></div>
+      <div id="vn-overlay"></div>
 
-    <!-- LAYER 4: Area karakter
-         Saat ini hanya kotak placeholder.
-         Untuk menambah karakter nanti, taruh <img> di dalam #char-placeholder:
-           <img id="char-img" src="assets/char_guide.png" alt="Guide">
-         Lalu di engine.js panggil: setCharacter('assets/char_lain.png') -->
-    <div id="char-area">
-      <div id="char-placeholder">
-        <span>Character<br>Placeholder</span>
+      <div id="char-area">
+        <div id="char-placeholder">
+          <span>Character<br />Placeholder</span>
+        </div>
+      </div>
+
+      <button id="back-btn" disabled title="Kembali ke dialog sebelumnya">
+        <span class="back-icon">◂</span> Rewind
+      </button>
+
+      <div id="options-wrap"></div>
+
+      <div id="dialog-area">
+        <div id="speaker-name-wrap">
+          <span id="speaker-name"></span>
+        </div>
+
+        <div id="text-box">
+          <p id="dialog-text"></p>
+
+          <span id="text-cursor">▼</span>
+        </div>
       </div>
     </div>
 
-    <!-- LAYER 5: Tombol Rewind (kembali 1 dialog, pojok kiri atas) -->
-    <button id="back-btn" disabled title="Kembali ke dialog sebelumnya">
-      <span class="back-icon">◂</span> Rewind
-    </button>
-
-    <!-- LAYER 6: Tombol-tombol opsi dialog
-         Diisi secara dinamis oleh engine.js / quiz.js
-         Posisi: di atas text box, rata kanan -->
-    <div id="options-wrap"></div>
-
-    <!-- LAYER 7: Area dialog (bagian bawah layar) -->
-    <div id="dialog-area">
-
-      <!-- Nameplate nama speaker (muncul jika ada speaker di scene) -->
-      <div id="speaker-name-wrap">
-        <span id="speaker-name"></span>
-      </div>
-
-      <!-- Text box utama. Klik untuk skip animasi typewriter. -->
-      <div id="text-box">
-        <p id="dialog-text"></p>
-        <!-- Kursor berkedip muncul setelah typewriter selesai -->
-        <span id="text-cursor">▼</span>
-      </div>
-
-    </div>
-
-  </div><!-- /#vn-container -->
-
-  <!--
-    URUTAN LOAD SCRIPT PENTING!
-    engine.js harus dimuat DULU karena mendefinisikan:
-      • state, CONFIG, DOM  → dipakai quiz.js.
-      • cancelTyping, typewriter, showOptions, dll.
-    quiz.js dimuat SETELAH karena bergantung pada hal di atas.
-    Keduanya baru dieksekusi setelah halaman selesai dimuat (DOMContentLoaded).
-  -->
-  <script src="engine.js"></script>
-  <script src="quiz.js"></script>
-
-
-</body>
+    <script src="engine.js"></script>
+    <script src="quiz.js"></script>
+  </body>
 </html>

@@ -1,63 +1,41 @@
-/* ============================================================
-   style.css — Visual Novel Engine: English Journey
-   ============================================================
-   Tipografi:
-     Cinzel  → speaker nameplate (serif caps elegan)
-     Lora    → teks dialog (serif nyaman dibaca)
-     Outfit  → tombol & elemen UI (sans modern)
-
-   Semua warna dan ukuran utama ada di :root
-   sehingga mudah dikustomisasi tanpa harus cari satu per satu.
-   ============================================================ */
-
-
-/* ─── CSS VARIABLES ──────────────────────────────────────────
-   Ubah nilai di sini untuk ganti tema warna secara serentak.   */
 :root {
-  /* Warna latar & overlay */
-  --clr-bg-fallback  : #060a14;               /* Warna fallback jika belum ada gambar BG */
-  --clr-overlay-bot  : rgba(4, 6, 18, 0.82);  /* Gelap di bagian bawah layar */
+  --clr-bg-fallback: #060a14;
+  --clr-overlay-bot: rgba(4, 6, 18, 0.82);
 
-  /* Text box */
-  --clr-textbox      : rgba(5, 8, 22, 0.93);
-  --clr-textbox-bdr  : rgba(90, 120, 200, 0.22);
+  --clr-textbox: rgba(5, 8, 22, 0.93);
+  --clr-textbox-bdr: rgba(90, 120, 200, 0.22);
 
-  /* Teks */
-  --clr-text         : #cdd3f0;
-  --clr-text-dim     : #7884b8;
+  --clr-text: #cdd3f0;
+  --clr-text-dim: #7884b8;
 
-  /* Nama speaker */
-  --clr-speaker      : #e8c97c;
-  --clr-speaker-bdr  : rgba(232, 201, 124, 0.28);
+  --clr-speaker: #e8c97c;
+  --clr-speaker-bdr: rgba(232, 201, 124, 0.28);
 
-  /* Aksen */
-  --clr-accent       : #7ea8e8;
+  --clr-accent: #7ea8e8;
 
-  /* Tombol opsi */
-  --clr-opt-bg       : rgba(10, 15, 42, 0.95);
-  --clr-opt-bdr      : rgba(90, 120, 200, 0.32);
-  --clr-opt-hover-bg : rgba(22, 40, 100, 0.96);
+  --clr-opt-bg: rgba(10, 15, 42, 0.95);
+  --clr-opt-bdr: rgba(90, 120, 200, 0.32);
+  --clr-opt-hover-bg: rgba(22, 40, 100, 0.96);
   --clr-opt-hover-bdr: rgba(126, 168, 232, 0.68);
 
-  /* Quiz feedback */
-  --clr-correct      : #6ee89a;
-  --clr-wrong        : #e87e7e;
+  --clr-correct: #6ee89a;
+  --clr-wrong: #e87e7e;
 
-  /* Font families */
-  --font-dialog  : 'Lora', Georgia, serif;
-  --font-speaker : 'Cinzel', 'Times New Roman', serif;
-  --font-ui      : 'Outfit', system-ui, sans-serif;
+  --font-dialog: "Lora", Georgia, serif;
+  --font-speaker: "Cinzel", "Times New Roman", serif;
+  --font-ui: "Outfit", system-ui, sans-serif;
 }
 
-
-/* ─── RESET & BASE ────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -66,17 +44,14 @@ html, body {
   color: var(--clr-text);
 }
 
-
-/* ═════════════════════════════════════════════════════════════
-   CONTAINER UTAMA
-   ═════════════════════════════════════════════════════════════ */
 #vn-container {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  user-select: none; /* Cegah teks ter-select saat klik cepat */
+  user-select: none;
 }
+
 .card {
   position: absolute;
   top: 50%;
@@ -90,8 +65,9 @@ html, body {
   border-radius: 12px;
   padding: 28px 32px;
 
-  z-index: 10000; /* 🔥 FIX UTAMA */
+  z-index: 10000;
 }
+
 #about-card-1 {
   left: 30%;
 }
@@ -99,12 +75,11 @@ html, body {
 #about-card-2 {
   left: 70%;
 }
+
 .hidden {
   display: none;
 }
 
-
-/* ─── BACKGROUND ──────────────────────────────────────────── */
 #vn-bg {
   position: absolute;
   inset: 0;
@@ -112,43 +87,35 @@ html, body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  /* Transisi halus saat background berganti */
+
   transition: background-image 0.5s ease;
 }
 
-
-/* ─── FILM GRAIN ──────────────────────────────────────────── */
-/* Tekstur noise halus agar background tidak terlihat datar.
-   Hapus elemen #vn-grain di HTML jika tidak diinginkan.       */
 #vn-grain {
   position: absolute;
   inset: 0;
-  pointer-events: none;  /* Tidak menghalangi interaksi mouse */
+  pointer-events: none;
   opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px;
 }
 
-
-/* ─── GRADIENT OVERLAY ────────────────────────────────────── */
-/* Gradasi dari transparan (atas) ke gelap (bawah).
-   Tujuan: teks di area dialog tetap kontras & terbaca.        */
 #vn-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    transparent              0%,
-    transparent              38%,
-    rgba(4, 6, 18, 0.28)    66%,
+    transparent 0%,
+    transparent 38%,
+    rgba(4, 6, 18, 0.28) 66%,
     var(--clr-overlay-bot) 100%
   );
 }
 
 .no-ui #vn-overlay,
 .no-ui #vn-grain {
-  display: none ;
+  display: none;
 }
 
 .no-ui #text-box {
@@ -164,7 +131,6 @@ html, body {
   display: none;
 }
 
-/* tombol tetap hidup */
 .no-ui #options-wrap {
   display: flex;
   bottom: 40px;
@@ -172,28 +138,24 @@ html, body {
   z-index: 9999;
 }
 
-/* ═════════════════════════════════════════════════════════════
-  AREA KARAKTER (PLACEHOLDER)
-   ═════════════════════════════════════════════════════════════ */
 #char-area {
   position: absolute;
-  bottom: 200px;       /* Di atas text box */
+  bottom: 200px;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 10;
 }
 
-/* Kotak placeholder — hapus border & teks ini setelah karakter ada */
 #char-placeholder {
   width: 200px;
-  height: 360px; 
+  height: 360px;
   border: 1.5px dashed rgba(90, 120, 200, 0.18);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(90, 120, 200, 0.20);
+  color: rgba(90, 120, 200, 0.2);
   font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 300;
@@ -203,7 +165,6 @@ html, body {
   line-height: 2;
 }
 
-/* Gambar karakter jika sudah ada (untuk nanti) */
 #char-placeholder img {
   width: 100%;
   height: 100%;
@@ -211,10 +172,6 @@ html, body {
   border: none;
 }
 
-
-/* ═════════════════════════════════════════════════════════════
-   TOMBOL REWIND
-   ═════════════════════════════════════════════════════════════ */
 #back-btn {
   position: absolute;
   top: 18px;
@@ -239,7 +196,10 @@ html, body {
 
   cursor: pointer;
   backdrop-filter: blur(8px);
-  transition: color 0.2s, border-color 0.2s, opacity 0.25s;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    opacity 0.25s;
 }
 
 #back-btn:hover:not(:disabled) {
@@ -258,13 +218,9 @@ html, body {
   margin-top: -1px;
 }
 
-
-/* ═════════════════════════════════════════════════════════════
-   TOMBOL OPSI DIALOG
-   ═════════════════════════════════════════════════════════════ */
 #options-wrap {
   position: absolute;
-  /* Posisi: kanan bawah, tepat di atas text box */
+
   bottom: 218px;
   right: 52px;
   z-index: 60;
@@ -294,21 +250,34 @@ html, body {
   text-align: left;
   backdrop-filter: blur(10px);
 
-  /* Animasi masuk dari kanan — muncul satu per satu (stagger) */
   opacity: 0;
   transform: translateX(14px);
   animation: optionSlideIn 0.22s ease forwards;
 
-  transition: background 0.16s, border-color 0.16s, transform 0.14s;
+  transition:
+    background 0.16s,
+    border-color 0.16s,
+    transform 0.14s;
 }
 
-/* Delay berbeda per tombol → efek stagger */
-.option-btn:nth-child(1) { animation-delay: 0.04s; }
-.option-btn:nth-child(2) { animation-delay: 0.09s; }
-.option-btn:nth-child(3) { animation-delay: 0.14s; }
-.option-btn:nth-child(4) { animation-delay: 0.19s; }
-.option-btn:nth-child(5) { animation-delay: 0.24s; }
-.option-btn:nth-child(6) { animation-delay: 0.29s; }
+.option-btn:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.option-btn:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.option-btn:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.option-btn:nth-child(4) {
+  animation-delay: 0.19s;
+}
+.option-btn:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.option-btn:nth-child(6) {
+  animation-delay: 0.29s;
+}
 
 @keyframes optionSlideIn {
   to {
@@ -327,25 +296,20 @@ html, body {
   transform: translateX(-3px) scale(0.985);
 }
 
-/* ─── Quiz: warna feedback setelah menjawab ───────────────── */
 .option-btn.correct {
-  background  : rgba(18, 68, 40, 0.93);
+  background: rgba(18, 68, 40, 0.93);
   border-color: var(--clr-correct);
-  color       : var(--clr-correct);
-  cursor      : default;
+  color: var(--clr-correct);
+  cursor: default;
 }
 
 .option-btn.wrong {
-  background  : rgba(68, 18, 18, 0.93);
+  background: rgba(68, 18, 18, 0.93);
   border-color: var(--clr-wrong);
-  color       : var(--clr-wrong);
-  cursor      : default;
+  color: var(--clr-wrong);
+  cursor: default;
 }
 
-
-/* ═════════════════════════════════════════════════════════════
-   AREA DIALOG (BAWAH LAYAR)
-   ═════════════════════════════════════════════════════════════ */
 #dialog-area {
   position: absolute;
   bottom: 0;
@@ -355,21 +319,20 @@ html, body {
   z-index: 50;
 }
 
-/* ─── Nameplate Nama Speaker ──────────────────────────────── */
 #speaker-name-wrap {
   display: inline-block;
-  visibility: hidden; /* Disembunyikan jika field "speaker" kosong */
+  visibility: hidden;
 }
 
 #speaker-name {
   display: inline-block;
   background: var(--clr-textbox);
   border: 1px solid var(--clr-speaker-bdr);
-  border-bottom: none; /* Menyatu dengan text box di bawahnya */
+  border-bottom: none;
 
   color: var(--clr-speaker);
   font-family: var(--font-speaker);
-  font-size: 0.80rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -378,52 +341,49 @@ html, body {
   border-radius: 3px 3px 0 0;
 }
 
-/* ─── Text Box ────────────────────────────────────────────── */
 #text-box {
   background: var(--clr-textbox);
   border: 1px solid var(--clr-textbox-bdr);
-  /* Sudut kiri atas rata (menyatu dengan nameplate)
-     Jika tidak ada speaker, engine.js menambahkan class .no-speaker */
   border-radius: 0 3px 3px 3px;
   padding: 20px 28px 18px;
   min-height: 106px;
 
-  cursor: pointer; /* Visual cue: klik untuk skip typewriter */
+  cursor: pointer;
 
   box-shadow:
     inset 0 1px 0 rgba(90, 120, 200, 0.07),
-    0 -1px 24px rgba(4, 6, 18, 0.40);
+    0 -1px 24px rgba(4, 6, 18, 0.4);
 }
 
-/* Jika tidak ada speaker, bulatkan semua sudut */
 #text-box.no-speaker {
   border-radius: 3px;
 }
 
-/* ─── Teks Dialog ─────────────────────────────────────────── */
 #dialog-text {
-  font-family : var(--font-dialog);
-  font-size   : 1.04rem;
-  font-weight : 400;
-  line-height : 1.82;
-  color       : var(--clr-text);
-  white-space : pre-wrap; /* Mendukung \n dalam string JSON */
-  min-height  : 2.5em;
+  font-family: var(--font-dialog);
+  font-size: 1.04rem;
+  font-weight: 400;
+  line-height: 1.82;
+  color: var(--clr-text);
+  white-space: pre-wrap;
+  min-height: 2.5em;
 }
 
-/* ─── Kursor Berkedip ─────────────────────────────────────── */
-/* Muncul setelah animasi typewriter selesai.
-   Memberi sinyal "kamu bisa klik opsi sekarang".              */
 #text-cursor {
-  display    : none;           /* Disembunyikan saat typewriter berjalan */
-  color      : var(--clr-accent);
-  font-size  : 0.60rem;
+  display: none;
+  color: var(--clr-accent);
+  font-size: 0.6rem;
   margin-left: 6px;
-  animation  : blink 1.2s step-end infinite;
+  animation: blink 1.2s step-end infinite;
   vertical-align: middle;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
