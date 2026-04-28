@@ -139,6 +139,7 @@ body {
 }
 
 #char-area {
+  display: none;
   position: absolute;
   bottom: 200px;
   left: 50%;
